@@ -1,0 +1,30 @@
+<%= form_with(model: generate_appointment, method: :POST, url: generate_appointments_path) do |form| %>
+  <% if generate_appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(generate_appointment.errors.count, "error") %> prohibited this generate_appointment from being saved:</h2>
+
+      <ul>
+        <% generate_appointment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :Doctor %>
+    <%= form.select :doctor_id, options_for_select(Doctor.all.map{|doc| [doc.name, doc.id]})-%>
+  </div>
+  <div class="field">
+    <%= form.label :Patient %>
+    <%= form.select :patient_id, options_for_select(Patient.all.map{|doc| [doc.name, doc.id]})-%>
+  </div>
+
+  <div class="field">
+    <%= form.label :Date_time %>
+    <%= form.datetime_local_field :appointment_datetime %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
